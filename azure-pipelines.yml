@@ -26,9 +26,9 @@ steps:
 - task: UseDotNet@2
   displayName: 'Install .NET Core SDK'
   inputs:
-    version: 4.6.1
-    performMultiLevelLookup: true
-    includePreviewVersions: true # Required for preview versions
+    version: '6.x'
+ #   performMultiLevelLookup: true
+ #   includePreviewVersions: true # Required for preview versions
     
 - task: CmdLine@2
   inputs:
