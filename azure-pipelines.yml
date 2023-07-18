@@ -32,16 +32,6 @@ steps:
     performMultiLevelLookup: true
     includePreviewVersions: true # Required for preview versions
 
-#Build your project
-- task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    command: build
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)' # Update this to match your need
-
-
-   
 - task: CmdLine@2
   inputs:
     script: 'mkdir d:\a\1\MobEAD' 
