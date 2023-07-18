@@ -23,13 +23,38 @@ variables:
 steps:
 # Command line
 # Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
+
+#Build environment
 - task: UseDotNet@2
   displayName: 'Install .NET Core SDK'
   inputs:
     version: '6.x'
- #   performMultiLevelLookup: true
- #   includePreviewVersions: true # Required for preview versions
-    
+    performMultiLevelLookup: true
+    includePreviewVersions: true # Required for preview versions
+
+#Restore dependencies
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+    vstsFeed: 'my-vsts-feed' # A series of numbers and letters
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    arguments: '--configuration $(buildConfiguration)'
+  displayName: 'dotnet build $(buildConfiguration)'
+
+#Build your project
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)' # Update this to match your need
+
+
+   
 - task: CmdLine@2
   inputs:
     script: 'mkdir d:\a\1\MobEAD' 
